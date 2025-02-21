@@ -1,0 +1,60 @@
+Step 1: Log in to AWS Console
+
+Open AWS Management Console.
+Navigate to IAM (Identity & Access Management) under Security, Identity, & Compliance.
+
+
+Step 2: Create IAM Users
+Go to "Users" → Click Add users.
+Enter Username (e.g., user1).
+Select AWS Management Console access → Set a password.
+Permissions: Choose one:
+Attach existing policies (e.g., AdministratorAccess, AmazonS3ReadOnlyAccess).
+Add to a group (Recommended).
+Create a custom policy (Advanced).
+Review & Create User → Download .csv file with login details.
+
+
+Step 3: Create IAM Groups & Assign Policies
+Go to "User Groups" → Click Create Group.
+Enter Group Name (e.g., S3-Admins).
+Select Policies (e.g., AmazonS3FullAccess).
+Create Group → Add users to this group.
+
+
+Step 4: Create & Attach IAM Policies (Optional)
+Go to "Policies" → Click Create Policy.
+Choose JSON Editor → Define custom permissions.
+Example: Read-only S3 Access:
+json
+Copy
+Edit
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket", "s3:GetObject"],
+      "Resource": "*"
+    }
+  ]
+}
+Click Next → Name Policy → Create Policy.
+Attach policy to Users or Groups.
+
+
+Step 5: Test User Permissions
+Get IAM Sign-in URL:
+Go to IAM Dashboard → Copy Sign-in URL for IAM users.
+Sign in as the IAM user (Incognito Mode).
+Try accessing AWS services (e.g., S3, EC2).
+Check if the permissions work correctly.
+
+
+Step 6: Review & Clean Up (Optional)
+Remove test users/groups after the lab.
+Delete unused policies to avoid security risks.
+
+
+Here is the link of AWS policy generator
+https://awspolicygen.s3.amazonaws.com/policygen.html

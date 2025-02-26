@@ -1,0 +1,52 @@
+Steps to Host a Static Website on AWS S3
+
+1️.  Create an S3 Bucket
+
+Go to AWS Console → Search for S3 and open it.
+Click "Create bucket" (It’s a big orange button).
+Give your bucket a unique name (like my-awesome-website).
+Select the region closest to your users.
+Uncheck "Block all public access" (since we need to make it public).
+Click "Create bucket" (boom! your bucket is ready).
+
+2. Upload Your Website Files
+
+Open your bucket → Click "Upload".
+Drag and drop your HTML, CSS, JS files (like index.html, style.css).
+Click "Upload" (simple, right?).
+
+
+3. Make your files public
+Select your index.html file (or other files you want public).
+Click "Actions" → "Make public by ACL" (if available).
+Or, go to Permissions → Edit Bucket Policy and paste this:
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::your-bucket-name/*"
+    }
+  ]
+}
+Replace your-bucket-name with your actual bucket name.
+Click "Save changes
+
+4. Enable staic website hositng
+Go to your Bucket settings → Click "Properties".
+Scroll to "Static website hosting" → Click "Edit".
+Choose "Enable", then:
+Index document: index.html
+(Optional) Error document: 404.html
+Click "Save changes".
+Copy the Bucket Website Endpoint (it looks like http://your-bucket.s3-website-region.amazonaws.com).
+
+5. Test your website
+Open the Bucket Website Endpoint in your browser.
+Your website should load! 
+
+
+Use AWS CloudFront : To make your site faster and add HTTPS.
+Use Route 53 (Domain Name System - DNS) : If you have a custom domain, link it here
